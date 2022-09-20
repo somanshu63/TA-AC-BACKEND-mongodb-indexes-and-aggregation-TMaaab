@@ -8,7 +8,7 @@ Write aggregation queries to perform following tasks.
    //db.users.aggregate([{$match: { isActive: true }},])
 
 2. Find all users whose name includes `blake` case insensitive.
-   //db.users.countDocuments({$text: {$search: "blake"}})
+   //db.users.aggregate([{$match: {name: 'blake'}}])
 
 3. Find all males.
    //db.users.aggregate([{$match: { gender: "male" }},])
@@ -91,7 +91,8 @@ green -> 123
     //db.users.aggregate([{$match: {gender: "female"}}, {$match: {favoriteFruit: "apple"}}, {$match: {eyeColor: "blue"}}, {$match: {"company.location.country": "USA"}}, {$sort: {"registered.date": -1}}])
 
 27. Find all 18+ inactive men and return only the fields specified below in the below provided format
-    //db.users.aggregate([{$match: {isActive: false}}, {$match: {age: {$gt: 18}}}, {$project: {name: 1,email: 1; identity: { eye: '$eyeColor', phone: '$company.phone', location: '$company.location' },},}])
+    //db.users.aggregate([{$match: {isActive: false, age: {$gt: 18}}}, {$project: {name: 1,email: 1, identity: { eye: '$eyeColor', phone: '$company.phone', location: '$company.location' }}}])
+
 
 ```js
 {
